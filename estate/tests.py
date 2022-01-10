@@ -1,26 +1,43 @@
 from django.test import TestCase
-from .models import Profile
+from .models import Neighborhood,Business
 
 # Create your tests here.
-
-
-class ProfileTestClass(TestCase):
+      
+   
+class NeighbourhoodTestClass(TestCase):
     def setUp(self):
-        self.new_profile = Profile(user='horhe',
-                                   bio='Lorem ipsum dolor sit amet, consectetur adipiscing eli',
-                                   profile_photo='image.png')
+        self.new_neighbourhood = Neighborhood('Donholm','Nairobi',56)
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.new_profile, Profile))
+        self.assertTrue(isinstance(self.new_neighbourhood, Neighborhood))
 
-    def update_profile(self):
-        self.new_profile.save_profile()
-        profile_id = self.new_profile.id
-        Profile.update_profile(id, "test_update")
-        self.assertEqual(self.caption.caption, "test_update")
+    def test_update_neighborhood(self):
+        self.new_neighborhood.save_hood()
+        neighborhood_id = self.new_neighbourhood.id
+        Neighborhood.update_hood(id, "Juja")
+        self.assertEqual(self.neighborhood.neighborhood,"Juja")
 
-    def test_delete_profile(self):
-        self.profile.save_profile()
-        self.profile.delete_profile()
-        profiles = Profile.objects.all()
-        self.assertTrue(len(profiles) == 0)
+    def test_delete_neighborhood(self):
+        self.new_neighbourhood.save_hood()
+        self.neighborhood.delete_hood()
+        hoods = Neighborhood.objects.all()
+        self.assertTrue(len(hoods) == 0)
+
+class BusinessTestClass(TestCase):
+    def setUp(self):
+        self.new_business = Business(biz_name ='CampAbilities',biz_email = 'cabilities@gmail.com', biz_description='Eat good Live good', biz_digits='0724654276')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_business, Business))
+
+    def test_update_business(self):
+        self.new_business.save_business()
+        business_id = self.new_business.id
+        Business.update_business(id, "CAbilities")
+        self.assertEqual(self.business.business, "CAbilities")
+
+    def test_delete_business(self):
+        self.business.save_business()
+        self.business.delete_business()
+        business = Business.objects.all()
+        self.assertTrue(len(business) == 0)
