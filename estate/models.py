@@ -1,7 +1,11 @@
+import sys
 from django.db import models
 from cloudinary.models import CloudinaryField
-
+from django.contrib.auth.models import User
+from django.db.models.fields import TextField
+from django.urls import reverse
 # Create your models here.
+
 class Neighborhood(models.Model):
     neighborhood_name = models.CharField(max_length=100)
     location = models.CharField(max_length=100,null=True)
@@ -26,7 +30,9 @@ class Neighborhood(models.Model):
     def search_hood(cls,id):
        search= cls.objects.filter(neighborhood_name__icontains=id)
        return search
-
+    
+    
+   
 class Business(models.Model):
     name=models.CharField(max_length=100)
     business_owner=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
@@ -63,3 +69,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(auto_now=True)
     neighourhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE,null=True,blank=True)
 
+    
+    def get_absolute_url(self):
+        return reverse('post')
+    
