@@ -1,4 +1,14 @@
-from django.shortcuts import render
+from django import forms
+from django.shortcuts import render,redirect
+from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
+import datetime as dt
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from .models import Post,Business
+from .form import BusinessForms,PostForms
+
 
 # Create your views here.
 class BusinessListView(ListView):
@@ -89,3 +99,17 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         if self.request.user == post.author:
             return True
         return False
+    
+
+def search_request(request):
+    if 'query' in request.POST and request.GET['query']: 
+        search = request.GET.get('query')
+        search_business= Business.search_by_title(search)
+        messages= f'{search}'
+        context = {"message":messages,"businesses":search_business}
+        
+        return render(request,'estate/search.html',context)
+
+    else:
+        message="You haven't searched for any item"
+        return render(request,'estate/search.html',{"message":message})   
