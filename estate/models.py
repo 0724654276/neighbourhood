@@ -56,3 +56,10 @@ class Business(models.Model):
     
     def get_absolute_url(self):
         return reverse('business-detail',kwargs={'pk':self.pk})
+
+class Post(models.Model):
+    author = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    post = TextField(null=True)
+    date_posted = models.DateTimeField(auto_now=True)
+    neighourhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE,null=True,blank=True)
+
