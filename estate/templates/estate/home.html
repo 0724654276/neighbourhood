@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  <div class="landing-page d-flex justify-content-center align-items-center text-center" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0, 0, 0, 0.7)),url(https://images.unsplash.com/photo-1567496898669-ee935f5f647a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fG5laWdoYm9yaG9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60);height:100vh;background-size:cover;background-position:center;background-repeat:no-repeat;">
+    <div class="content-info text-white">
+      <h1>Welcome To Neighborhood Area Update</h1>
+      <h4 style="font-size: larger;">We are committed to keep you updated on the whats happening around this area</h4>
+    </div>
+  </div>
+  <div class="container pb-5 mb-5">
+    
+    <h2 class="text-center pt-5 mb-5">Businesses Around Us</h2>
+    <div class="row">
+      {% for business in businesses  %}
+          <div class="col-md-4 p-3">
+            <div class="card">
+              <img src="{{business.business_image.url}}" alt="" class="img-fluid">
+              <div class="card-body">
+                <a href="{% url 'business-detail' business.pk %}"><p class="card-text">{{business.name}}</p></a>
+                <p class="card-text">{{business.location}}</p>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+    <div class="div">
+      <h3 class="pt-5 mt-5 text-center">Helplines Incase Of Emmergency</h3>
+      <p>Get instant help </p>
+    </div>
+    <div class="row pt-3">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1590125234767-5aecaa98c228?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fGFtYnVsYW5jZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="img-fluid card-img-top"
+            alt="police" style="height: 300px;">
+          <div class="card-body">
+            <p>Ambulance</p>
+            <p class="card-text">715</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1617906855223-a69f14c9841d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBvbGljZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="img-fluid card-img-top" alt="ambulance" style="height: 300px;">
+          <div class="card-body">
+            <p>Police</p>
+            <p class="card-text">999</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1616482444347-da2f0590a10a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fGZpcmUlMjBmaWdodGVyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="img-fluid card-img-top"
+            alt="police" style="height: 300px;">
+          <div class="card-body">
+            <p>FireFighters</p>
+            <p class="card-text">888</p>
+          </div>
+        </div>
+      </div>
+      <div class="about text-center pt-5 mt-5">
+        <h2>About</h2>
+        <p class="pt-3">Neighborhood Area Code update enables the neighbours in this area to be updated with the latest area news and any concerns. <br>We all live in a society and are all bound to a neighborhood. Neighborhood is very important and it does definitely have an impact on what we are and how and where we live in. Unless we are happy in living in a good neighborhood, we could not get to live peacefully.</p>
+      </div>
+     
+    </div>
+  </div>
+
+{% endblock %} 
